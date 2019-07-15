@@ -13,6 +13,7 @@ import java.util.List;
 public class NicePlaceRepo {
     private static MutableLiveData<List<NicePlaceInfo>> mutableLiveData;
     public static NicePlaceRepo nicePlaceRepo =null;
+    private static List<NicePlaceInfo> nicePlaceInfos;
     public static NicePlaceRepo getInstance(){
         if(nicePlaceRepo==null){
             nicePlaceRepo = new NicePlaceRepo();
@@ -22,7 +23,7 @@ public class NicePlaceRepo {
 
     public MutableLiveData<List<NicePlaceInfo>> getNicePlaces(){
         mutableLiveData = new MutableLiveData<>();
-        List<NicePlaceInfo> nicePlaceInfos = new ArrayList<>();
+        nicePlaceInfos = new ArrayList<>();
         nicePlaceInfos.add(new NicePlaceInfo("Place One","https://firebasestorage.googleapis.com/v0/b/pushnotificationdemo-75b6d.appspot.com/o/64278687-close-up-of-a-hand-of-a-thief-stealing-a-painting-in-a-gallery-of-a-ship-at-sea.jpg?alt=media&token=91748c0b-ffa9-450c-9da2-d8597cd102b1"));
         nicePlaceInfos.add(new NicePlaceInfo("place Two","https://firebasestorage.googleapis.com/v0/b/pushnotificationdemo-75b6d.appspot.com/o/clipart354881.png?alt=media&token=0e20ad58-b668-4b59-bf13-a57701b8fa0f"));
         nicePlaceInfos.add(new NicePlaceInfo("Place Three","https://firebasestorage.googleapis.com/v0/b/pushnotificationdemo-75b6d.appspot.com/o/dp.jpg?alt=media&token=2a3fac6e-6a2c-466c-9e96-19e2c21bd33e"));
@@ -35,7 +36,13 @@ public class NicePlaceRepo {
         nicePlaceInfos.add(new NicePlaceInfo("Place Ten","https://firebasestorage.googleapis.com/v0/b/pushnotificationdemo-75b6d.appspot.com/o/tree.jpg?alt=media&token=1c8135c3-bc56-4a38-8673-b5159e230aca"));
         mutableLiveData.setValue(nicePlaceInfos);
         return mutableLiveData;
-
-
     }
+
+    public static List<NicePlaceInfo> addNewData(){
+        List<NicePlaceInfo> list = new ArrayList<>();
+        list.add(new NicePlaceInfo("Place One","https://firebasestorage.googleapis.com/v0/b/pushnotificationdemo-75b6d.appspot.com/o/64278687-close-up-of-a-hand-of-a-thief-stealing-a-painting-in-a-gallery-of-a-ship-at-sea.jpg?alt=media&token=91748c0b-ffa9-450c-9da2-d8597cd102b1"));
+       return list;
+    }
+
+
 }

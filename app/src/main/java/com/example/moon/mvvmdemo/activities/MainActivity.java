@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.moon.mvvmdemo.R;
 import com.example.moon.mvvmdemo.adapter.Recycler_view_adapter;
 import com.example.moon.mvvmdemo.models.NicePlaceInfo;
@@ -20,17 +22,19 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     Recycler_view_adapter recycler_view_adapter;
+    LottieAnimationView lottieAnimationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recycler_view_);
+        lottieAnimationView = (LottieAnimationView)findViewById(R.id.lottie_animation_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         //////////////////////////////////////////////
           ///Fetch Data/////////////
-        MainActivityViewModel mainActivityViewModel = new MainActivityViewModel();
+        final MainActivityViewModel mainActivityViewModel = new MainActivityViewModel();
         MutableLiveData<List<NicePlaceInfo>> placeData =  mainActivityViewModel.getPlaceData();
         placeData.observe(this, new Observer<List<NicePlaceInfo>>() {
             @Override
@@ -43,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
         ///////////////////////////////////////
         recycler_view_adapter = new Recycler_view_adapter(mainActivityViewModel.getPlaceData().getValue(),getApplicationContext());
         recyclerView.setAdapter(recycler_view_adapter);
+
+        lottieAnimationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivityViewModel.addNewData();
+            }
+        });
+
+
 
 
 

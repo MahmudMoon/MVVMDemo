@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivityViewModel extends ViewModel {
-    private MutableLiveData<List<NicePlaceInfo>> mutableLiveData_of_nice_places;
+    private static MutableLiveData<List<NicePlaceInfo>> mutableLiveData_of_nice_places;
 
     public MutableLiveData<List<NicePlaceInfo>> getPlaceData(){
         if(mutableLiveData_of_nice_places==null){
@@ -19,4 +19,11 @@ public class MainActivityViewModel extends ViewModel {
         }
         return mutableLiveData_of_nice_places;
     }
+
+    public boolean addNewData(){
+        List<NicePlaceInfo> nicePlaceInfos = NicePlaceRepo.addNewData();
+        mutableLiveData_of_nice_places.postValue(nicePlaceInfos);
+        return true;
+    }
+
 }
