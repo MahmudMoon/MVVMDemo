@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
+
+    <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/recycler_view_"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:scrollbars="vertical">
+
+   </androidx.recyclerview.widget.RecyclerView>
+
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie_animation_view"
         android:layout_width="100dp"
@@ -17,13 +27,5 @@
         android:layout_marginBottom="25dp"
         android:layout_marginRight="25dp"
         />
-
-    <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/recycler_view_"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:scrollbars="vertical">
-
-   </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

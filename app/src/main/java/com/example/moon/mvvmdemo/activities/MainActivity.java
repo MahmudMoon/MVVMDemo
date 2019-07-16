@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -23,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     Recycler_view_adapter recycler_view_adapter;
     LottieAnimationView lottieAnimationView;
+    MainActivityViewModel mainActivityViewModel;
+    private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,13 +39,14 @@ public class MainActivity extends AppCompatActivity {
 
         //////////////////////////////////////////////
           ///Fetch Data/////////////
-        final MainActivityViewModel mainActivityViewModel = new MainActivityViewModel();
-        MutableLiveData<List<NicePlaceInfo>> placeData =  mainActivityViewModel.getPlaceData();
-        placeData.observe(this, new Observer<List<NicePlaceInfo>>() {
+
+        mainActivityViewModel = new MainActivityViewModel();
+        mainActivityViewModel.getPlaceData().observe(this, new Observer<List<NicePlaceInfo>>() {
             @Override
             public void onChanged(List<NicePlaceInfo> nicePlaceInfos) {
                 recycler_view_adapter.notifyDataSetChanged();
-
+                recyclerView.smoothScrollToPosition(mainActivityViewModel.getPlaceData().getValue().size()-1);
+                Log.i(TAG, "onChanged: " + mainActivityViewModel.getPlaceData().getValue().size());
             }
         });
 
@@ -48,10 +54,12 @@ public class MainActivity extends AppCompatActivity {
         recycler_view_adapter = new Recycler_view_adapter(mainActivityViewModel.getPlaceData().getValue(),getApplicationContext());
         recyclerView.setAdapter(recycler_view_adapter);
 
+
+
         lottieAnimationView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivityViewModel.addNewData();
+                Log.i(TAG, "onClick: "+mainActivityViewModel.addNewData());
             }
         });
 
